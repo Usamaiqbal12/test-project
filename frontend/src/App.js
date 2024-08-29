@@ -13,11 +13,13 @@ const App = () => {
   const PrivateRoute = ({ children }) => {
     return AuthService.isAuthenticated() ? children : <Navigate to="/login" />;
   };
-
+  const RedirectIfAuthenticated = ({ children }) => {
+    const isAuth = AuthService.isAuthenticated();
+    return isAuth ? <Navigate to="/dashboard" /> : children;
+  };
 useEffect(() => {
 },[isRerender])
   
-
   return (
     <Router>
       <div className="flex h-screen bg-black">
@@ -28,7 +30,7 @@ useEffect(() => {
 
           <main className="flex-1 overflow-y-auto p-6">
             <Routes>
-              <Route path="/login" element={<Login setIsRerender={setIsRerender} />} />
+              <Route path="/login" element={<RedirectIfAuthenticated><Login setIsRerender={setIsRerender} /></RedirectIfAuthenticated>} />
               <Route path="/dashboard" element={<PrivateRoute><Home /></PrivateRoute>} />
               <Route path="/dashboard/reports" element={<PrivateRoute><Reports /></PrivateRoute>} />
               <Route path="/dashboard/settings" element={<PrivateRoute><Settings /></PrivateRoute>} />

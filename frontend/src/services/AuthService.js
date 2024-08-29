@@ -28,7 +28,8 @@ const AuthService = {
     },
   
     isAuthenticated: () => {
-      return localStorage.getItem('accessToken') !== null;
+      let isStEmpty = localStorage.getItem('accessToken') !== null
+      return isStEmpty;
     }
   };
   

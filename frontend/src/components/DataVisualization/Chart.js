@@ -21,7 +21,7 @@ const SelectBox = ({ updateRegion }) => {
   };
 
   return (
-    <div className="w-64">
+    <div className="w-64 mb-4">
       <label htmlFor="country-select" className="block text-white mb-2">
         Select Region:
       </label>
@@ -108,6 +108,7 @@ const Chart = () => {
 
   const options = {
     responsive: true,
+    maintainAspectRatio: false, 
     plugins: {
       legend: {
         position: "top",
@@ -192,8 +193,8 @@ const Chart = () => {
     <div className="bg-red-800 p-6 rounded-lg shadow-lg">
       <SelectBox ordersData={ordersData} updateRegion={setSelectedRegion} />
       <h2 className="text-2xl font-bold mb-4 text-white">Sales Data</h2>
-      <div className="h-96 bg-red-700 flex items-center justify-center">
-        <p className="text-white"><Bar data={chartData} options={options} style={{ height: "400px", width: "600px" }} /></p>
+      <div className="h-[100%] w-[100%] min-h-[420px] bg-red-700 text-white flex items-center justify-center">
+       <Bar data={chartData} options={options}  />
       </div>
     </div>
   );
